@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+        <!-- I use a meta tag that tells browser that the width of the viewport has to be the same as the width of the device, that the scale
+        of the page when it's first loaded must be 1 and that the user cannot scale the page. This way I make sure that the default touch
+        behaviours in portable devices (scrolling, zooming, etc.) are disabled; otherwise the playability of my game would be compromised -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" type="text/css" href="style/style.css"/>
+        <script src="myLibrary/plugins/LAB.min.js"></script>
+        <script>
+
+            /* Declaring a variable containing the path to the library containing generic game code, code that will be usefull for any
+            game in the future */
+            var myLibrarydir = 'myLibrary/';
+
+            /* Dynamic script-loading tool that makes sure to load all the .js files in their logical order to respect the existing dependencies between the files */
+            $LAB
+                    /* Scripts containing generic code reusable for other games */
+                    .script(myLibrarydir + 'Math.js').wait()
+                    .script(myLibrarydir + 'IGameLoopObject.js').wait()
+                    .script(myLibrarydir + 'geom/Vector2.js').wait()
+                    .script(myLibrarydir + 'geom/Rectangle.js').wait()
+                    .script(myLibrarydir + 'Canvas2D.js').wait()
+                    .script(myLibrarydir + 'system/Color.js').wait()
+                    .script(myLibrarydir + 'system/Keys.js').wait()
+                    .script(myLibrarydir + 'input/ButtonState.js').wait()
+                    .script(myLibrarydir + 'input/Keyboard.js').wait()
+                    .script(myLibrarydir + 'input/Mouse.js').wait()
+                    .script(myLibrarydir + 'input/Touch.js').wait()
+                    .script(myLibrarydir + 'SpriteSheet.js').wait()
+                    .script(myLibrarydir + 'Sound.js').wait()
+                    .script(myLibrarydir + 'Animation.js').wait()
+                    .script(myLibrarydir + 'gameobjects/GameObject.js').wait()
+                    .script(myLibrarydir + 'gameobjects/GameObjectList.js').wait()
+                    .script(myLibrarydir + 'gameobjects/GameObjectGrid.js').wait()
+                    .script(myLibrarydir + 'gameobjects/SpriteGameObject.js').wait()
+                    .script(myLibrarydir + 'gameobjects/AnimatedGameObject.js').wait()
+                    .script(myLibrarydir + 'gui/Button.js').wait()
+                    .script(myLibrarydir + 'gui/Label.js').wait()
+                    .script(myLibrarydir + 'GameStateManager.js').wait()
+                    .script(myLibrarydir + 'Game.js').wait()
+
+                    /* Scripts containing game-specific code */
+                    .script('assets/levels/levelsGameWorlds.js').wait()
+                    .script('gameobjects/Tile.js').wait()
+                    .script('gameobjects/Acorn.js').wait()
+                    .script('gameobjects/TileField.js').wait()
+                    .script('gameobjects/Timer.js').wait()
+                    .script('gameobjects/Player.js').wait()
+                    .script('gameobjects/VisibilityTimer.js').wait()
+
+                    .script('level/Level.js').wait()
+                    .script('gui/LevelButton.js').wait()
+                    .script('states/TitleMenuState.js').wait()
+                    .script('states/HelpState.js').wait()
+                    .script('states/LevelMenuState.js').wait()
+                    .script('states/PlayingState.js').wait()
+                    .script('states/GameOverState.js').wait()
+                    .script('states/LevelFinishedState.js').wait()
+                    .script('AcornHunt.js').wait(function() {
+
+                        /* Passing the div name that contains the canvas, the canvas name, and the game's native size as parameters of the Game.start method allows me to adjust the script to any canvas name just by changing the name in one place (here). It is also helpful when it come to resize the game and all its game objects depending on the viewport size */
+                        myLibrary.Game.start('gameArea', 'mycanvas', 1440, 825);
+                    });
+
+        </script>
+        <title>AcornHunt</title>
+    </head>
+
+    <body>
+        <div id="gameArea">
+            <canvas id="mycanvas">Oooops! Maybe it's time to upgrade your browser! It seems it doesn't support HTML5</canvas>
+        </div>
+    </body>
+</html>
